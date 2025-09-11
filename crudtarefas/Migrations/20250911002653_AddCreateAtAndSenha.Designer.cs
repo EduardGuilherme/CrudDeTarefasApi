@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using crudtarefas.Data;
 
@@ -11,9 +12,11 @@ using crudtarefas.Data;
 namespace crudtarefas.Migrations
 {
     [DbContext(typeof(SistemadeTarefasDBContext))]
-    partial class SistemadeTarefasDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250911002653_AddCreateAtAndSenha")]
+    partial class AddCreateAtAndSenha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
