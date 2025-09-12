@@ -1,4 +1,5 @@
 ﻿using crudtarefas.Data;
+using crudtarefas.Enums;
 using crudtarefas.Models;
 using crudtarefas.Repositorio.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +26,25 @@ namespace crudtarefas.Repositorio
                 Include(x => x.Usuario).
                 ToListAsync();
         }
+        public async Task<List<TarefaModel>> BuscarPorStatus(StatusTarefas status)
+        {
+            return await _dbContext.Tarefas
+                .Include(x => x.Usuario)
+                .Where(x => x.Status == status)
+                .ToListAsync();
+        }
+
+        public async Task<List<TarefaModel>> BuscarPorUsuario(int usuarioId)
+        {
+            return await _dbContext.Tarefas
+                .Include(x => x.Usuario)
+                .Where(x => x.UsuarioId == usuarioId)
+                .ToListAsync();
+        }
         public async Task<TarefaModel> Adicionar(TarefaModel tarefa)
         {
             await _dbContext.Tarefas.AddAsync(tarefa);
+            tarefa.CreatedAt = DateTime.Now;
             await _dbContext.SaveChangesAsync();
             return tarefa;
         }

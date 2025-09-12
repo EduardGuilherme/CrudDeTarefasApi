@@ -1,4 +1,5 @@
-﻿using crudtarefas.Models;
+﻿using crudtarefas.Enums;
+using crudtarefas.Models;
 using crudtarefas.Repositorio.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,15 +27,27 @@ namespace crudtarefas.Controllers
             TarefaModel tarefa = await _tarefaRepositorio.BuscarPorId(id);
             return Ok(tarefa);
         }
-        [HttpPost]
+        [HttpGet("status/{status}")]
+        public async Task<ActionResult<List<TarefaModel>>> BuscarPorStatus(StatusTarefas status)
+        {
+            var tarefas = await _tarefaRepositorio.BuscarPorStatus(status);
+            return Ok(tarefas);
+        }
 
+        [HttpGet("usuario/{usuarioId}")]
+        public async Task<ActionResult<List<TarefaModel>>> BuscarPorUsuario(int usuarioId)
+        {
+            var tarefas = await _tarefaRepositorio.BuscarPorUsuario(usuarioId);
+            return Ok(tarefas);
+        }
+        [HttpPost]
         public async Task<ActionResult<TarefaModel>> Cadastrar([FromBody] TarefaModel tarefa)
         {
             TarefaModel tarefaModel =  await _tarefaRepositorio.Adicionar(tarefa);
             return Ok(tarefaModel);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult<TarefaModel>> Atualizar([FromBody] TarefaModel tarefa, int id)
         {
             tarefa.Id = id;

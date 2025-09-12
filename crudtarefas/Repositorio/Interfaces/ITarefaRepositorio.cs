@@ -1,4 +1,5 @@
-﻿using crudtarefas.Models;
+﻿using crudtarefas.Enums;
+using crudtarefas.Models;
 
 namespace crudtarefas.Repositorio.Interfaces
 {
@@ -6,6 +7,9 @@ namespace crudtarefas.Repositorio.Interfaces
     {
         Task<List<TarefaModel>> BuscarTodasTarefas();
         Task<TarefaModel> BuscarPorId(int id);
+
+        Task<List<TarefaModel>> BuscarPorStatus(StatusTarefas status);
+        Task<List<TarefaModel>> BuscarPorUsuario(int usuarioId);
 
         Task<TarefaModel> Adicionar(TarefaModel tarefa);
 
