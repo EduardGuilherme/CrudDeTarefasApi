@@ -10,6 +10,8 @@ namespace crudtarefas.Models
 
         public StatusTarefas Status { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         public int? UsuarioId { get; set; }
         public virtual UsuarioModel? Usuario { get; set; }   
     }
