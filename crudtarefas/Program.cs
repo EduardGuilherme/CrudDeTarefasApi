@@ -38,6 +38,13 @@ namespace crudtarefas
 
             var app = builder.Build();
 
+            // Criar banco e aplicar migrations automaticamente
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<SistemadeTarefasDBContext>();
+                db.Database.Migrate(); // aplica migrations
+            }
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
